@@ -109,7 +109,7 @@ Example request body:
 ```json
 {
   "email": "user@example.com",
-  "password": 1234
+  "password": "password123"
 }
 ```
 
@@ -122,7 +122,7 @@ Example request body:
 ```json
 {
   "email": "updated@example.com",
-  "password": 5678
+  "password": "updated123"
 }
 ```
 
@@ -147,11 +147,12 @@ Deletes an account and returns the deleted record.
 The current account model includes:
 
 - `id: int`
-- `email: str`
-- `password: int`
+- `email: valid email address`
+- `password: string with minimum length of 8 characters`
 
 ## Notes
 
 - The current implementation returns `404` when an account is not found for update, patch, or delete operations.
 - Database errors are surfaced as `500` responses.
 - The API currently creates tables automatically on startup.
+- Request validation rejects invalid email addresses and passwords shorter than 8 characters.

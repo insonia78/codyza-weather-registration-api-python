@@ -1,11 +1,15 @@
+from pydantic import EmailStr, StringConstraints
 from sqlmodel import Field, SQLModel
+from typing import Annotated
+
+
+PasswordStr = Annotated[str, StringConstraints(min_length=8)]
 
 
 # Base model class - shared fields for all representations of a room
 class AccountBase(SQLModel):
-    email: str = Field()
-    password: int = Field()
-    
+    email: EmailStr = Field()
+    password: PasswordStr = Field()
 
 
 # Account table model - maps to the "accounts" database table
@@ -21,8 +25,8 @@ class AccountPublic(AccountBase):
     id: int
 
 
-# Account update model - all fields can be optional becaue
+# Account update model - all fields can be optional because
 # we fallback to None
 class AccountUpdate(SQLModel):
-    email: str | None = None
-    password: int | None = None
+    email: EmailStr | None = None
+    password: PasswordStr | None = None
