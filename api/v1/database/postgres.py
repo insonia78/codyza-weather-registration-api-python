@@ -35,6 +35,7 @@ def ensure_database_exists():
         ).scalar_one_or_none()
 
         if database_exists is None:
+            connection.exec_driver_sql(f'DROP DATABASE IF EXISTS "{postgre_file_name}"')
             connection.exec_driver_sql(f'CREATE DATABASE "{postgre_file_name}"')
 
 def create_db_and_tables():
