@@ -13,7 +13,7 @@ from controller.accounts_controller.models import models
 load_dotenv()
 
 postgre_file_name = os.getenv("POSTGRES_FILE_NAME")
-postgre_url=f"{os.getenv('POSTGRES_URL')}/{postgre_file_name}"
+postgre_url=f"{os.getenv('POSTGRES_URL')}"
 
 def _create_admin_engine():
     admin_url = make_url(postgre_url).set(database="postgres")
